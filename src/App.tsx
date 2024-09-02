@@ -9,12 +9,12 @@ import {
 	useNodesState,
 } from "@xyflow/react";
 import { useCallback } from "react";
-
 import "@xyflow/react/dist/style.css";
 
 const initialNodes = [
 	{ id: "1", position: { x: 0, y: 0 }, data: { label: "1" } },
 ];
+
 const initialEdges: any[] = [];
 
 export default function App() {
