@@ -8,7 +8,7 @@
     "emeraldwalk.runonsave": {
       "commands": [
         {
-          "match": "\\.tsx$|\\.ts$|\\.json$|\\.css$|\\.code-workspace$",
+          "match": "\\.js$|\\.jsx$|\\.tsx$|\\.ts$|\\.json$|\\.css$|\\.code-workspace$",
           "cmd": "npx @biomejs/biome check --write --unsafe ${file}"
         }
       ]
