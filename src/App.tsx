@@ -13,10 +13,7 @@ import {
 } from "@xyflow/react";
 import { useCallback, useEffect, useState } from "react";
 import "@xyflow/react/dist/style.css";
-
-const PromptNode = () => {
-	return <>aaa</>;
-};
+import { PromptNode } from "./PromptNode";
 
 const initialEdges: Edge[] = [];
 
