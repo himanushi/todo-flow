@@ -1,8 +1,11 @@
 import {
 	Background,
 	BackgroundVariant,
+	type Connection,
 	Controls,
+	type Edge,
 	MiniMap,
+	type Node,
 	ReactFlow,
 	addEdge,
 	useEdgesState,
@@ -11,18 +14,26 @@ import {
 import { useCallback } from "react";
 import "@xyflow/react/dist/style.css";
 
-const initialNodes = [
-	{ id: "1", position: { x: 0, y: 0 }, data: { label: "1" } },
+const PromptNode = () => {
+	return <>aaa</>;
+};
+
+const initialNodes: Node[] = [
+	{ id: "prompt", position: { x: 100, y: 100 }, data: {}, type: "prompt" },
 ];
 
-const initialEdges: any[] = [];
+const initialEdges: Edge[] = [];
+
+const nodeTypes = {
+	prompt: PromptNode,
+};
 
 export default function App() {
 	const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
 	const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
 	const onConnect = useCallback(
-		(params: any) => setEdges((eds) => addEdge(params, eds)),
+		(params: Connection) => setEdges((eds) => addEdge(params, eds)),
 		[setEdges],
 	);
 
@@ -34,6 +45,7 @@ export default function App() {
 				onNodesChange={onNodesChange}
 				onEdgesChange={onEdgesChange}
 				onConnect={onConnect}
+				nodeTypes={nodeTypes}
 			>
 				<Controls />
 				<MiniMap />

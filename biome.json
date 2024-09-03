@@ -8,7 +8,7 @@
     "rules": {
       "recommended": true,
       "suspicious": {
-        "noExplicitAny": { "level": "info" }
+        "noExplicitAny": { "level": "off" }
       }
     }
   },
