@@ -11,16 +11,12 @@ import {
 	useEdgesState,
 	useNodesState,
 } from "@xyflow/react";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "@xyflow/react/dist/style.css";
 
 const PromptNode = () => {
 	return <>aaa</>;
 };
-
-const initialNodes: Node[] = [
-	{ id: "prompt", position: { x: 100, y: 100 }, data: {}, type: "prompt" },
-];
 
 const initialEdges: Edge[] = [];
 
@@ -29,8 +25,31 @@ const nodeTypes = {
 };
 
 export default function App() {
-	const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-	const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+	const [nodes, setNodes, onNodesChange] = useNodesState<Node>([]);
+	const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>(initialEdges);
+	const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+
+	useEffect(() => {
+		setScreenSize({
+			width: window.innerWidth,
+			height: window.innerHeight,
+		});
+	}, []);
+
+	useEffect(() => {
+		const initialNodes: Node[] = [
+			{
+				id: "prompt",
+				position: {
+					x: screenSize.width / 2 - 50,
+					y: screenSize.height / 2 - 25,
+				},
+				data: {},
+				type: "prompt",
+			},
+		];
+		setNodes(initialNodes);
+	}, [screenSize, setNodes]);
 
 	const onConnect = useCallback(
 		(params: Connection) => setEdges((eds) => addEdge(params, eds)),
