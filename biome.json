@@ -9,6 +9,15 @@
       "recommended": true,
       "suspicious": {
         "noExplicitAny": { "level": "off" }
+      },
+      "nursery": {
+        "useSortedClasses": {
+          "level": "error",
+          "options": {
+            "attributes": ["className"],
+            "functions": []
+          }
+        }
       }
     }
   },
