@@ -8,6 +8,7 @@
 		"build": "tsc -b && vite build"
 	},
 	"dependencies": {
+		"@floating-ui/react": "^0.26.23",
 		"@xyflow/react": "^12.2.0",
 		"classnames": "^2.5.1",
 		"react": "^18.3.1",
