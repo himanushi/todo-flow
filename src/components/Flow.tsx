@@ -6,7 +6,6 @@ import {
 	type Edge,
 	MiniMap,
 	type Node,
-	Panel,
 	ReactFlow,
 	addEdge,
 	useEdgesState,
@@ -14,8 +13,8 @@ import {
 } from "@xyflow/react";
 import { useCallback, useEffect, useState } from "react";
 import "@xyflow/react/dist/style.css";
-import { Icon } from "./Icon";
 import { PromptNode } from "./PromptNode";
+import { Settings } from "./Settings";
 
 const initialEdges: Edge[] = [];
 
@@ -65,9 +64,7 @@ export const Flow = () => {
 				onConnect={onConnect}
 				nodeTypes={nodeTypes}
 			>
-				<Panel position="top-right">
-					<Icon name="settings" className="text-4xl text-gray-600" />
-				</Panel>
+				<Settings />
 				<Controls />
 				<MiniMap />
 				<Background variant={BackgroundVariant.Dots} gap={12} size={1} />
