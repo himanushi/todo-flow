@@ -11,7 +11,7 @@ export const t2t = async (text: string): Promise<string> => {
 			Authorization: `Bearer ${apiKey}`,
 		},
 		body: JSON.stringify({
-			model: "gpt-3.5-turbo",
+			model: "gpt-4o-mini",
 			messages: [{ role: "user", content: text }],
 		}),
 	});
