@@ -21,11 +21,13 @@ import {
 import "@xyflow/react/dist/style.css";
 import { PromptNode } from "./PromptNode";
 import { Settings } from "./Settings";
+import { YesNoNode } from "./YesNoNode";
 
 const initialEdges: Edge[] = [];
 
 const nodeTypes = (setNodes: Dispatch<SetStateAction<Node[]>>) => ({
 	prompt: PromptNode({ setNodes }),
+    yesno: YesNoNode,
 });
 
 export const Flow = () => {
