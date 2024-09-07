@@ -1,5 +1,5 @@
-import type { Edge, Node } from "@xyflow/react";
-import { type Dispatch, type SetStateAction, useState } from "react";
+import type { Edge, Node, NodeProps } from "@xyflow/react";
+import { type Dispatch, type SetStateAction, useId, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { t2t } from "./t2t";
 
@@ -11,8 +11,11 @@ export const PromptNode =
 		setNodes: Dispatch<SetStateAction<Node[]>>;
 		setEdges: Dispatch<SetStateAction<Edge[]>>;
 	}) =>
-	() => {
-		const [value, setValue] = useState("");
+	(props: NodeProps<Node<{ prompts: string[] }>>) => {
+		const prompts = props.data.prompts ?? [];
+		const [prompt, setPrompt] = useState(prompts[0] ?? "");
+
+		console.log("PromptNode", props);
 
 		return (
 			<div className="flex w-52 flex-col items-center justify-center gap-2 rounded-lg border-2 border-gray-900 bg-teal-300 p-3">
@@ -21,9 +24,9 @@ export const PromptNode =
 					maxRows={5}
 					minRows={2}
 					onChange={(e) => {
-						setValue(e.target.value);
+						setPrompt(e.target.value);
 					}}
-					value={value}
+					value={prompt}
 				/>
 				<button
 					type="button"
@@ -33,22 +36,18 @@ export const PromptNode =
 					onClick={() => {
 						const createYesNoNodes = async () => {
 							try {
-								const responses = await Promise.all([
-									t2t(value),
-									t2t(value),
-									t2t(value),
-								]);
+								const newPrompt = await t2t(prompt);
 
-								const newNodes = responses.map((response, i) => ({
-									id: `yesno-${Date.now()}-${i}`,
+								const newNode = {
+									id: crypto.randomUUID(),
 									position: { x: Math.random() * 400, y: Math.random() * 400 },
-									data: { response },
-									type: "yesno",
-								}));
+									data: { prompts: [...prompts, prompt, newPrompt] },
+									type: "prompt",
+								};
 
-								setNodes((nds: any) => [...nds, ...newNodes]);
+								setNodes((nds: Node[]) => [...nds, newNode]);
 							} catch (error) {
-								console.error("Error creating YesNoNodes:", error);
+								console.error("Error creating PromptNodes:", error);
 							}
 						};
 
