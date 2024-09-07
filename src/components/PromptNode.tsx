@@ -26,13 +26,19 @@ export const PromptNode =
 					onClick={() => {
 						const createYesNoNodes = async () => {
 							try {
-								const response = await t2t(value);
-								const newNodes = Array.from({ length: 3 }, (_, i) => ({
+								const responses = await Promise.all([
+									t2t(value),
+									t2t(value),
+									t2t(value),
+								]);
+
+								const newNodes = responses.map((response, i) => ({
 									id: `yesno-${Date.now()}-${i}`,
 									position: { x: Math.random() * 400, y: Math.random() * 400 },
-									data: { response: response },
+									data: { response },
 									type: "yesno",
 								}));
+
 								setNodes((nds: any) => [...nds, ...newNodes]);
 							} catch (error) {
 								console.error("Error creating YesNoNodes:", error);
