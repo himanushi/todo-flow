@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
-export const PromptNode = ({ setNodes }) => {
+export const PromptNode = ({ setNodes }: { setNodes: any }) => {
 	const [value, setValue] = useState("");
 
 	return (
@@ -27,7 +27,7 @@ export const PromptNode = ({ setNodes }) => {
 						data: {},
 						type: "prompt",
 					};
-					setNodes((nds) => [...nds, newNode]);
+					setNodes((nds: any) => [...nds, newNode]);
 				}}
 			>
 				やる

@@ -11,15 +11,24 @@ import {
 	useEdgesState,
 	useNodesState,
 } from "@xyflow/react";
-import { useCallback, useEffect, useState } from "react";
+import {
+	type Dispatch,
+	type SetStateAction,
+	useCallback,
+	useEffect,
+	useState,
+} from "react";
 import "@xyflow/react/dist/style.css";
+import type { JSX } from "react/jsx-runtime";
 import { PromptNode } from "./PromptNode";
 import { Settings } from "./Settings";
 
 const initialEdges: Edge[] = [];
 
-const nodeTypes = (setNodes) => ({
-	prompt: (props) => <PromptNode {...props} setNodes={setNodes} />,
+const nodeTypes = (setNodes: Dispatch<SetStateAction<Node[]>>) => ({
+	prompt: (props: JSX.IntrinsicAttributes & { setNodes: any }) => (
+		<PromptNode {...props} setNodes={setNodes} />
+	),
 });
 
 export const Flow = () => {
