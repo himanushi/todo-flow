@@ -2,12 +2,15 @@ import type { Edge, Node, NodeProps } from "@xyflow/react";
 import { type Dispatch, type SetStateAction, useId, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { t2t } from "./t2t";
+import { useFlow } from "./FlowContext";
 
 export const PromptNode = (props: NodeProps<Node<{ prompts: string[] }>>) => {
 	const prompts = props.data.prompts ?? [];
 	const [prompt, setPrompt] = useState(prompts[0] ?? "");
 
-	return (
+  const { setNodes, setEdges } = useFlow();
+
+  return (
 		<div className="flex w-52 flex-col items-center justify-center gap-2 rounded-lg border-2 border-gray-900 bg-teal-300 p-3">
 			<TextareaAutosize
 				className="w-full resize-none rounded-lg border-2 border-gray-900 px-3 py-2"
