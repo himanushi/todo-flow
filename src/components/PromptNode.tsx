@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { t2t } from "./t2t";
 import TextareaAutosize from "react-textarea-autosize";
 
 export const PromptNode =
@@ -23,13 +24,22 @@ export const PromptNode =
 						"rounded-lg border-2 border-gray-900 bg-rose-500 px-3 transition-all duration-150 active:translate-y-1"
 					}
 					onClick={() => {
-						const newNode = {
-							id: `node-${Date.now()}`,
-							position: { x: Math.random() * 400, y: Math.random() * 400 },
-							data: {},
-							type: "prompt",
+						const createYesNoNodes = async () => {
+							try {
+								const response = await t2t(value);
+								const newNodes = Array.from({ length: 3 }, (_, i) => ({
+									id: `yesno-${Date.now()}-${i}`,
+									position: { x: Math.random() * 400, y: Math.random() * 400 },
+									data: { response },
+									type: "yesno",
+								}));
+								setNodes((nds: any) => [...nds, ...newNodes]);
+							} catch (error) {
+								console.error("Error creating YesNoNodes:", error);
+							}
 						};
-						setNodes((nds: any) => [...nds, newNode]);
+
+						createYesNoNodes();
 					}}
 				>
 					やる

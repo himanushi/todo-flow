@@ -57,6 +57,17 @@ export const Flow = () => {
 		setNodes(initialNodes);
 	}, [screenSize, setNodes]);
 
+	useEffect(() => {
+		if (nodes.length > 1) {
+			const newEdges = nodes.slice(1).map((node) => ({
+				id: `edge-${node.id}`,
+				source: "prompt",
+				target: node.id,
+			}));
+			setEdges((eds) => [...eds, ...newEdges]);
+		}
+	}, [nodes, setEdges]);
+
 	const onConnect = useCallback(
 		(params: Connection) => setEdges((eds) => addEdge(params, eds)),
 		[setEdges],
@@ -80,3 +91,4 @@ export const Flow = () => {
 		</div>
 	);
 };
+import { type Edge } from "@xyflow/react";
