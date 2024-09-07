@@ -19,16 +19,13 @@ import {
 	useState,
 } from "react";
 import "@xyflow/react/dist/style.css";
-import type { JSX } from "react/jsx-runtime";
 import { PromptNode } from "./PromptNode";
 import { Settings } from "./Settings";
 
 const initialEdges: Edge[] = [];
 
 const nodeTypes = (setNodes: Dispatch<SetStateAction<Node[]>>) => ({
-	prompt: (props: JSX.IntrinsicAttributes & { setNodes: any }) => (
-		<PromptNode {...props} setNodes={setNodes} />
-	),
+	prompt: PromptNode({ setNodes }),
 });
 
 export const Flow = () => {
