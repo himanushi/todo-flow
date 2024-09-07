@@ -38,7 +38,7 @@ export const Flow = () => {
 				onNodesChange={onNodesChange}
 				onEdgesChange={onEdgesChange}
 				nodeTypes={{
-					prompt: PromptNode({ setNodes, setEdges }),
+					prompt: PromptNode,
 				}}
 			>
 				<Settings />
