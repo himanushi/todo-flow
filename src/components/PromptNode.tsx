@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
-export const PromptNode = () => {
+export const PromptNode = ({ setNodes }) => {
 	const [value, setValue] = useState("");
 
 	return (
@@ -20,6 +20,15 @@ export const PromptNode = () => {
 				className={
 					"rounded-lg border-2 border-gray-900 bg-rose-500 px-3 transition-all duration-150 active:translate-y-1"
 				}
+				onClick={() => {
+					const newNode = {
+						id: `node-${Date.now()}`,
+						position: { x: Math.random() * 400, y: Math.random() * 400 },
+						data: {},
+						type: "prompt",
+					};
+					setNodes((nds) => [...nds, newNode]);
+				}}
 			>
 				やる
 			</button>

@@ -18,9 +18,9 @@ import { Settings } from "./Settings";
 
 const initialEdges: Edge[] = [];
 
-const nodeTypes = {
-	prompt: PromptNode,
-};
+const nodeTypes = (setNodes) => ({
+	prompt: (props) => <PromptNode {...props} setNodes={setNodes} />,
+});
 
 export const Flow = () => {
 	const [nodes, setNodes, onNodesChange] = useNodesState<Node>([]);
@@ -62,7 +62,7 @@ export const Flow = () => {
 				onNodesChange={onNodesChange}
 				onEdgesChange={onEdgesChange}
 				onConnect={onConnect}
-				nodeTypes={nodeTypes}
+				nodeTypes={nodeTypes(setNodes)}
 			>
 				<Settings />
 				<Controls />
