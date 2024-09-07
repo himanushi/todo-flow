@@ -1,9 +1,16 @@
-import { useState } from "react";
-import { t2t } from "./t2t";
+import type { Edge, Node } from "@xyflow/react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
+import { t2t } from "./t2t";
 
 export const PromptNode =
-	({ setNodes }: { setNodes: any }) =>
+	({
+		setNodes,
+		setEdges,
+	}: {
+		setNodes: Dispatch<SetStateAction<Node[]>>;
+		setEdges: Dispatch<SetStateAction<Edge[]>>;
+	}) =>
 	() => {
 		const [value, setValue] = useState("");
 
