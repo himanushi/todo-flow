@@ -30,7 +30,7 @@ export const PromptNode =
 								const newNodes = Array.from({ length: 3 }, (_, i) => ({
 									id: `yesno-${Date.now()}-${i}`,
 									position: { x: Math.random() * 400, y: Math.random() * 400 },
-									data: { response },
+									data: { response: response },
 									type: "yesno",
 								}));
 								setNodes((nds: any) => [...nds, ...newNodes]);

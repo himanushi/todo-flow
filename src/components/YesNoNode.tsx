@@ -1,36 +1,22 @@
-import { useState, useEffect } from "react";
-import { t2t } from "./t2t";
+import { useState } from "react";
 
-export const YesNoNode = ({ setNodes }: { setNodes: any }) => {
-	const [response, setResponse] = useState("");
-
-	useEffect(() => {
-		const fetchResponse = async () => {
-			try {
-				const result = await t2t("Please provide a yes or no response.");
-				setResponse(result);
-			} catch (error) {
-				console.error("Error fetching response:", error);
-			}
-		};
-
-		fetchResponse();
-	}, []);
+export const YesNoNode = ({ data, setNodes }: { data: any; setNodes: any }) => {
+	const [response] = useState(data.response);
 
 	return (
 		<div className="flex w-52 flex-col items-center justify-center gap-2 rounded-lg border-2 border-gray-900 bg-blue-300 p-3">
-			<p>{response || "Loading response..."}</p>
+			<p>{response}</p>
 			<button
 				type="button"
 				className="rounded-lg border-2 border-gray-900 bg-green-500 px-3 transition-all duration-150 active:translate-y-1"
 				onClick={() => {
-					const newNode = {
-						id: `node-${Date.now()}`,
+					const newYesNoNode = {
+						id: `yesno-${Date.now()}`,
 						position: { x: Math.random() * 400, y: Math.random() * 400 },
-						data: {},
+						data: { response: "New response based on Yes" },
 						type: "yesno",
 					};
-					setNodes((nds: any) => [...nds, newNode]);
+					setNodes((nds: any) => [...nds, newYesNoNode]);
 				}}
 			>
 				Yes
