@@ -1,5 +1,5 @@
-import type { Edge, Node, NodeProps } from "@xyflow/react";
-import { type Dispatch, type SetStateAction, useId, useState } from "react";
+import type { Node, NodeProps } from "@xyflow/react";
+import { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { useFlow } from "./FlowContext";
 import { t2t } from "./t2t";
@@ -7,13 +7,14 @@ import { t2t } from "./t2t";
 export const PromptNode = (props: NodeProps<Node<{ prompts: string[] }>>) => {
 	const prompts = props.data.prompts ?? [];
 	const [prompt, setPrompt] = useState(prompts[prompts.length - 1] ?? "");
+	console.log("PromptNode", props);
 
 	const { setNodes, setEdges } = useFlow();
 
 	return (
 		<div className="flex w-52 flex-col items-center justify-center gap-2 rounded-lg border-2 border-gray-900 bg-teal-300 p-3">
 			<TextareaAutosize
-				className="w-full resize-none rounded-lg border-2 border-gray-900 px-3 py-2"
+				className="w-full resize-none rounded-lg border-2 border-gray-900 px-3 py-2 text-xs"
 				maxRows={5}
 				minRows={2}
 				onChange={(e) => {
@@ -37,8 +38,14 @@ export const PromptNode = (props: NodeProps<Node<{ prompts: string[] }>>) => {
 								data: { prompts: [...prompts, prompt, newPrompt] },
 								type: "prompt",
 							};
+							setNodes((nds) => [...nds, newNode]);
 
-							setNodes((nds: Node[]) => [...nds, newNode]);
+							const newEdge = {
+								id: crypto.randomUUID(),
+								source: props.id,
+								target: newNode.id,
+							};
+							setEdges((eds) => [...eds, newEdge]);
 						} catch (error) {
 							console.error("Error creating PromptNodes:", error);
 						}

@@ -6,10 +6,12 @@ import {
 	MiniMap,
 	type Node,
 	ReactFlow,
+	addEdge,
 	useEdgesState,
 	useNodesState,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
+import { useCallback } from "react";
 import { FlowProvider } from "./FlowContext";
 import { PromptNode } from "./PromptNode";
 import { Settings } from "./Settings";
