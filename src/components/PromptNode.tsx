@@ -37,9 +37,11 @@ export const PromptNode = (props: NodeProps<Node<{ prompts: string[] }>>) => {
           onClick={() => {
             const createYesNoNodes = async () => {
               try {
-                // const newPrompt = await t2t(prompt);
-                const newPrompt =
-                  "あなたは、このプロンプトに対して、どのように反応しますか？";
+                const newPrompt = await t2t(
+                  `次のプロンプトの問題を端的に解決して。「${prompt}」`,
+                );
+                // const newPrompt =
+                //   "あなたは、このプロンプトに対して、どのように反応しますか？";
 
                 const newNode = {
                   id: crypto.randomUUID(),
