@@ -6,12 +6,10 @@ import {
 	MiniMap,
 	type Node,
 	ReactFlow,
-	addEdge,
 	useEdgesState,
 	useNodesState,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { useCallback } from "react";
 import { FlowProvider } from "./FlowContext";
 import { PromptNode } from "./PromptNode";
 import { Settings } from "./Settings";
@@ -21,7 +19,7 @@ const initialNodes: Node[] = [
 		id: "prompt",
 		position: {
 			x: window.innerWidth / 2 - 104,
-			y: window.innerHeight / 2 - 100,
+			y: 100,
 		},
 		data: {},
 		type: "prompt",
