@@ -12,12 +12,6 @@
           "cmd": "npx @biomejs/biome check --write --unsafe ${file}"
         }
       ]
-    },
-    "[typescript]": {
-      "editor.tabSize": 2
-    },
-    "[typescriptreact]": {
-      "editor.tabSize": 2
     }
   },
   "extensions": {
